@@ -22,8 +22,10 @@ Fetches quotes based on character and show filters.
 - Get random quote from particular character: `/api/quotes?character=lelouch&random=1`
 - Get all quotes from particular show: `/api/quotes?show=code geass`
 - Get random quote from particular show: `/api/quotes?show=code geass&random=1`
-- Get quotes by multiple characters: `/api/quotes?character=lelouch,light`
-- Get quotes by multiple shows: `/api/quotes?show=code geass,rose of versailles`
+- Get quotes by multiple characters: `/api/quotes?character=lelouch,oscar jarjayes,spike spiegel`
+- Get quotes by multiple shows: `/api/quotes?show=code geass,rose of versailles,violet evergarden`
+- Get random quote from list of characters: `/api/quotes?character=lelouch,oscar jarjayes,spike spiegel&random=1`
+- Get random quote from list of shows: `/api/quotes?show=code geass,rose of versailles,violet evergarden&random=1`
 - Get all quotes: `/api/quotes`
 
 **Responses**:
@@ -36,23 +38,23 @@ Fetches quotes based on character and show filters.
 
 ### Usage Examples
 
-You can use cURL to get quotes in the terminal. Alternately you could also use the hosted instance[] directly through you web browser by appending your query to the URL in the specified format.
+You can use cURL to get quotes in the terminal. Alternately you could also use the [hosted instance](https://yurippe.vercel.app/) directly through your web browser by appending your query to the URL in the specified format.
 
 **Get quotes by character**:
 ```sh
-curl -X GET "http://[]/api/quotes?character=lelouch"
+curl -X GET "https://yurippe.vercel.app/api/quotes?character=lelouch"
 ```
 
 **Get random quotes**:
 ```sh
-curl -X GET "http://[]/api/quotes?character=lelouch&random=2"
+curl -X GET "https://yurippe.vercel.app/api/quotes?character=lelouch&random=2"
 ```
 
 **Get quotes by multiple characters and shows**:
 ```sh
-curl -X GET "http://[]/api/quotes?character=lelouch,oscar&show=code geass,rose of versailles"
+curl -X GET "https://yurippe.vercel.app/api/quotes?character=lelouch,oscar&show=code geass,rose of versailles"
 ```
 
 ### Notes
 
-Most of the quotes used in this project were extracted from [cf-anime-quotes](https://github.com/aynh/cf-anime-quotes) by [AynH](https://github.com/aynh/cf-anime-quotes). Apart from these, several dozen quotes from newer or unquoted shows were added by yours truly.
+Most of the quotes used in this project were extracted from [cf-anime-quotes](https://github.com/aynh/cf-anime-quotes) by [AynH](https://github.com/aynh). Apart from these, several dozen quotes from newer or unquoted shows were added by yours truly.
