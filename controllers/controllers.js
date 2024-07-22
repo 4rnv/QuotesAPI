@@ -11,80 +11,48 @@ const allQuotes =  async (req, res) => {
     }
 }
 
-const quotesChara =  async (req, res) => {
+const getQuotes = async (req,res) => {
     try {
-        const {name} = req.params;
-        const quote = await Quote.find({character: {
-            $regex: name,
-            $options: 'i'
-        }});
-        if(quote.length === 0) {
-            return res.status(404).json({ message: "No quotes found for that character" });
-        }
-        res.status(200).json(quote);
-    }
-    catch(error) {
-        res.status(500).json({message: error.message});
-    }
-}
+        const {character, show, random} = req.query;
+        let filter = {};
 
-const quotesCharaRandom = async (req, res) => {
-    try {
-        const {name} = req.params;
-        const quote = await Quote.find({character: {
-            $regex: name,
-            $options: 'i'
-        }});
-        if(quote.length === 0) {
-            return res.status(404).json({ message: "No quotes found for that character" });
+        if(character) {
+            const charactersList = character.split(',').map(chara => new RegExp(chara, 'i')); //making array from query
+            filter.character = { $in : charactersList };
         }
-        random_quote = Math.floor(Math.random() * quote.length);
-        res.status(200).json(quote[random_quote]);
-    }
-    catch(error) {
-        res.status(500).json({message: error.message});
-    }
-}
 
-const quotesShow = async (req, res) => {
-    try {
-        const {show} = req.params;
-        const quote = await Quote.find({show: {
-            $regex: show,
-            $options: 'i'
-        }});
-        if(quote.length === 0) {
-            return res.status(404).json({ message: "No quotes found for that show" });
+        if(show) {
+            const showsList = show.split(',').map(show => new RegExp(show, 'i'));
+            filter.show = { $in : showsList };
         }
-        res.status(200).json(quote);
-    }
-    catch(error) {
-        res.status(500).json({message: error.message});
-    }
-}
 
-const quotesShowRandom = async (req, res) => {
-    try {
-        const {show} = req.params;
-        const quote = await Quote.find({show: {
-            $regex: show,
-            $options: 'i'
-        }});
-        if(quote.length === 0) {
-            return res.status(404).json({ message: "No quotes found for that show" });
+        let quotes;
+        console.log(filter);
+        
+        if(random) {
+            quotes = await Quote.aggregate([
+                { $match : filter },
+                { $sample : { size : parseInt(random, 10) || 1}}
+            ]); //sample is specific keyword for number of results returned by aggregate function
         }
-        random_quote = Math.floor(Math.random() * quote.length);
-        res.status(200).json(quote[random_quote]);
-    }
-    catch(error) {
-        res.status(500).json({message: error.message});
+        else {
+            quotes = await Quote.find(filter);
+        }
+
+        if (quotes.length === 0) {
+            return res.status(404).json({ message: "No quotes found for the given criteria" });
+        }
+
+        res.status(200).json(quotes);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 }
 
 const addQuote = async (req, res) => {
     try {
         const quote = await Quote.create(req.body);
-        res.status(200).json(quote);
+        res.status(201).json(quote);
     }
     catch(error) {
         res.status(500).json({message: error.message});
@@ -93,9 +61,6 @@ const addQuote = async (req, res) => {
 
 module.exports = {
     allQuotes,
-    quotesShow,
-    quotesShowRandom,
-    quotesChara,
-    quotesCharaRandom,
+    getQuotes,
     addQuote
 }
