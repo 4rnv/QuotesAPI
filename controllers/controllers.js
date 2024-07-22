@@ -13,16 +13,18 @@ const allQuotes =  async (req, res) => {
 
 const getQuotes = async (req,res) => {
     try {
-        const {character, show, random} = req.query;
+        let {character, show, random} = req.query;
         let filter = {};
 
         if(character) {
-            const charactersList = character.split(',').map(chara => new RegExp(chara, 'i')); //making array from query
+            character = character.trim();
+            const charactersList = character.split(',').map(chara => new RegExp(chara.trim(), 'i')); //making array from query
             filter.character = { $in : charactersList };
         }
 
         if(show) {
-            const showsList = show.split(',').map(show => new RegExp(show, 'i'));
+            show = show.trim();
+            const showsList = show.split(',').map(show => new RegExp(show.trim(), 'i'));
             filter.show = { $in : showsList };
         }
 
@@ -30,6 +32,7 @@ const getQuotes = async (req,res) => {
         console.log(filter);
         
         if(random) {
+            random = random.trim();
             quotes = await Quote.aggregate([
                 { $match : filter },
                 { $sample : { size : parseInt(random, 10) || 1}}
@@ -51,6 +54,10 @@ const getQuotes = async (req,res) => {
 
 const addQuote = async (req, res) => {
     try {
+        const apiKey = req.headers['x-api-key'];
+        if (apiKey !== process.env.API_SECRET) {
+            return res.status(403).json({ message: "Yikes sweetie, you aren't allowed to do that. If you want to add a quote, open an issue on https://github.com/4rnv/QuotesAPI." });
+        }
         const quote = await Quote.create(req.body);
         res.status(201).json(quote);
     }

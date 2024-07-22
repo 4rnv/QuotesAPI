@@ -1,14 +1,14 @@
 require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
-const Quote = require('./models/quote.model.js')
-//const {allQuotes,quotesShow,quotesShowRandom,quotesChara,quotesCharaRandom, addQuote} = require('./controllers/controllers.js')
+const pug = require('pug')
 const {allQuotes, getQuotes, addQuote} = require('./controllers/controllers.js')
 
 const app = express()
+app.set('view engine', 'pug');
 app.use(express.json());
 
-app.get('/', (req, res) => {res.send('<h1 style="text-align:center;">Anime Quotes API</h1>');});
+app.get('/', (req, res) => {res.render(__dirname +'/templates/index.pug')});
 
 app.get('/api/quotes', getQuotes);
 
