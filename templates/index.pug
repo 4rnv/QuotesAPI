@@ -3,17 +3,47 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        link(rel="stylesheet", href="style.css")
+        link(rel="shortcut icon", href="styles/favicon.png", type="image/x-icon")
+        link(rel="stylesheet", href="css/style.css")
         title Anime Quotes API
     body
         h1 Anime Quotes API
-        p This API lets you fetch quotes from various anime characters and shows. Built with MongoDB, Express, Pug, and Node.js, it is designed to be convienent and straightforward to use. You can filter quotes by both shows and characters. You can specify the number of quotes to be returned by using the 
-            i random 
-            | parameter. You can search for multiple shows and characters in a query.
+        p This API lets you fetch quotes from various anime characters and shows. Built with MongoDB, Express, Pug, SCSS, and Node.js, it is designed to be convienent and straightforward to use. You can filter quotes by both shows and characters. You can also specify the number of quotes to be returned by using the 
+            i random
+            |  parameter.
         h2 Route
         div 
             code /api/quotes
-        a(href="/api/quotes", target="_blank")  Try it
+        h2 Queries
+        p Get all quotes by particular character: 
+        code /api/quotes?character=lelouch 
+            a(href="/api/quotes?character=lelouch", target="_blank") Try it
+        p Get random quote from particular character: 
+        code /api/quotes?character=lelouch&random=1 
+            a(href="/api/quotes?character=lelouch&random=1", target="_blank") Try it
+        p Get all quotes from particular show: 
+        code /api/quotes?show=code geass 
+            a(href="/api/quotes?show=code geass", target="_blank") Try it
+        p Get random quote from particular show: 
+        code /api/quotes?show=code geass&random=1 
+            a(href="/api/quotes?show=code geass&random=1", target="_blank") Try it
+        h2 Multiple characters/shows
+        p You can also search for multiple shows or characters in a query, separated by commas.
+        p Get quotes by multiple characters:
+        code /api/quotes?character=lelouch,oscar jarjayes,spike spiegel 
+            a(href="/api/quotes?character=lelouch,oscar jarjayes,spike spiegel", target="_blank") Try it
+        p Get quotes by multiple shows: 
+        code /api/quotes?show=code geass,rose of versailles,violet evergarden 
+            a(href="/api/quotes?show=code geass,rose of versailles,violet evergarden", target="_blank") Try it
+        p Get random quote from list of characters: 
+        code /api/quotes?character=lelouch,oscar jarjayes,spike spiegel&random=1 
+            a(href="/api/quotes?character=lelouch,oscar jarjayes,spike spiegel&random=1", target="_blank") Try it
+        p Get random quote from list of shows: 
+        code /api/quotes?show=code geass,rose of versailles,violet evergarden&random=1 
+            a(href="/api/quotes?show=code geass,rose of versailles,violet evergarden&random=1", target="_blank") Try it
+        p Get ALL quotes
+        code /api/quotes
+            a(href="/api/quotes", target="_blank")  Try it
         p For detailed documentation check the repository at 
             a(href='https://github.com/4rnv/QuotesAPI') https://github.com/4rnv/QuotesAPI
             | . Enhancements and suggestions are welcome!

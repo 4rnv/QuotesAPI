@@ -1,0 +1,45 @@
+$background: rgb(65, 0, 100);
+$text: rgb(200,200,200);
+//$accent: rgb(227, 114, 48);
+$accent: rgb(214, 112, 99);
+
+@font-face {
+    font-family: "DINPro Light";
+    src: url(/styles/DINProLight.otf);
+}
+
+body {
+    background: $background;
+    color: $text;
+    font-size: 16px;
+    padding: 2vh 10vw;
+    font-family: "DINPro Light";
+    a {
+        text-decoration: none;
+        color: $accent;
+        border-radius: 0.2rem;
+        padding: 2px;
+        transition: all 0.2s;
+        &:hover {
+            background: $accent;
+            color: $text;
+        }
+    }
+    h1 {
+        text-align: center;
+    }
+    code {
+        background: rgba(255, 255, 255, 0.2);
+        line-height: 32px;
+        padding: 0.4rem 0.2rem;
+        border-radius: 0.2rem;
+        a {
+            background: rgba(255, 255, 255, 0.2);
+            color: $text;
+        }
+    }
+    @media screen and (max-width: 800px) {
+        padding: 0;
+        font-size: 8px;
+      }
+}

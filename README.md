@@ -17,7 +17,7 @@ Fetches quotes based on character and show filters.
 - `show=`: Filters quotes by show. Case-insensitive, partial matches allowed. You can filter for quotes from multiple shows by separating them with a comma.
 - `random=` (optional): Number of random quotes to fetch. Takes any non-zero integer value. Default is 1. If this is not set the API will return all quotes from whatever show or character you have selected.
 
-**Examples**:
+**Example Queries**:
 - Get all quotes by particular character: `/api/quotes?character=lelouch`
 - Get random quote from particular character: `/api/quotes?character=lelouch&random=1`
 - Get all quotes from particular show: `/api/quotes?show=code geass`
