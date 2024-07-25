@@ -38,7 +38,7 @@ Fetches quotes based on character and show filters.
 
 ### Usage Examples
 
-You can use cURL to get quotes in the terminal. Alternately you could also use the [hosted instance](https://yurippe.vercel.app/) directly through your web browser by appending your query to the URL in the specified format.
+You can use cURL to get quotes in the terminal. Alternatively, you could also use the [hosted instance](https://yurippe.vercel.app/) directly through your web browser by appending your query to the URL in the specified format.
 
 **Get quotes by character**:
 ```sh
