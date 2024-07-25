@@ -5,7 +5,7 @@ $accent: rgb(214, 112, 99);
 
 @font-face {
     font-family: "DINPro Light";
-    src: url(/styles/DINProLight.otf);
+    src: url(../styles/DINProLight.otf);
 }
 
 body {
@@ -39,7 +39,11 @@ body {
         }
     }
     @media screen and (max-width: 800px) {
-        padding: 0;
-        font-size: 8px;
+        body {
+        padding: 6px;
+        }
+        code {
+            font-size: 12px;
+        }
       }
 }
