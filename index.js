@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require('express')
+const cors = require('cors');
 const mongoose = require('mongoose')
 const pug = require('pug')
 const path = require('path')
@@ -7,7 +8,9 @@ const {allQuotes, getQuotes, addQuote} = require('./controllers/controllers.js')
 const sassMiddleware = require('node-sass-middleware');
 const { debug } = require('console')
 
-const app = express()
+const app = express();
+app.use(cors());
+
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'templates'));
 app.use(sassMiddleware(
