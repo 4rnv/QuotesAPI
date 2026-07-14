@@ -17,7 +17,6 @@
     "express": "^4.19.2",
     "mongodb": "^6.8.0",
     "mongoose": "^8.5.1",
-    "node-sass-middleware": "^1.1.0",
     "pug": "^3.0.3",
     "sass": "^1.77.8"
   },
