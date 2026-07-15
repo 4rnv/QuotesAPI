@@ -1,0 +1,46 @@
+@font-face {
+    font-family: "DINPro Light";
+    src: url(../DINProLight.otf);
+}
+
+body {
+    background: #410064;
+    color: #c8c8c8;
+    font-size: 1rem;
+    padding: 4rem;
+    font-family: "DINPro Light";
+}
+
+body a {
+    text-decoration: none;
+    color: #d67063;
+    border-radius: 0.2rem;
+    padding: 2px;
+    transition: all 0.2s;
+}
+
+body a:hover {
+    background: #d67063;
+}
+
+body h1 {
+    text-align: center;
+}
+
+body code {
+    background: rgba(255, 255, 255, 0.2);
+    line-height: 4rem;
+    padding: 0.4rem 0.2rem;
+    border-radius: 0.2rem;
+}
+
+body code a {
+    background: rgba(255, 255, 255, 0.2);
+    color: #c8c8c8;
+}
+
+@media screen and (max-width: 800px) {
+    body {
+        padding: 1rem;
+    }
+}
