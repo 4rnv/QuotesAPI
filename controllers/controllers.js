@@ -1,22 +1,11 @@
 const Quote = require('../models/quote.model.js')
 const mongoose = require('mongoose')
 
-const allQuotes = async (req, res) => {
-    try {
-        const quotes = await Quote.find({});
-        quotes = quotes.map((q) => ({ "character": q.character, "show": q.show, "quote": q.quote }));
-        res.status(200).json(quotes);
-    }
-    catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-}
-
 const getQuotes = async (req, res) => {
     try {
         let { character, show, random } = req.query;
         let filter = {};
-
+        const maxLimit = 50;
         if (character) {
             character = character.trim();
             const charactersList = character.split(',').map(chara => chara.trim());
@@ -42,14 +31,18 @@ const getQuotes = async (req, res) => {
 
         if (random) {
             random = parseInt(random.trim(), 10) || 1;
-            random = random < 50 ? random : 1;
+            random = Math.max(1, random);
+            random = random < maxLimit ? random : maxLimit;
             quotes = await Quote.aggregate([
                 { $match: filter },
                 { $sample: { size: random } }
             ]); //sample is specific keyword for number of results returned by aggregate function
         }
         else {
-            quotes = await Quote.find(filter);
+            quotes = await Quote.aggregate([
+                { $match: filter },
+                { $sample: { size: maxLimit } }
+            ]);
         }
 
         if (quotes.length === 0) {
@@ -78,7 +71,6 @@ const addQuote = async (req, res) => {
 }
 
 module.exports = {
-    allQuotes,
     getQuotes,
     addQuote
 }

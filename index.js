@@ -4,7 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose')
 const pug = require('pug')
 const path = require('path')
-const { allQuotes, getQuotes, addQuote } = require('./controllers/controllers.js')
+const { getQuotes, addQuote } = require('./controllers/controllers.js')
 
 const app = express();
 app.use(cors());
