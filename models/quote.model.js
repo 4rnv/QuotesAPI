@@ -14,7 +14,7 @@ const QuoteSchema = mongoose.Schema(
         quote: {
             type: String,
             required: [true, "Empty quote"]
-        },  
+        },
     }
 );
 
