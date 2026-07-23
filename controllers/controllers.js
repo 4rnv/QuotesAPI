@@ -4,6 +4,8 @@ const mongoose = require('mongoose')
 const getQuotes = async (req, res) => {
     try {
         let { character, show, random } = req.query;
+        const ua = req.headers['user-agent'] || 'unknown';
+        const ref = req.headers['referer'] || 'direct';
         let filter = {};
         const maxLimit = 50;
         if (character) {
@@ -28,7 +30,8 @@ const getQuotes = async (req, res) => {
 
         let quotes;
         console.log(filter);
-
+        console.log(ref);
+        console.log(ua);
         if (random) {
             random = parseInt(random.trim(), 10) || 1;
             random = Math.max(1, random);
